@@ -5,8 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CurrencyController {
-
+public class Controller {
 
     @Value("${spring.application.name}")
     private String name;
