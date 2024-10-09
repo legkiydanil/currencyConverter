@@ -20,7 +20,8 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation ("org.json:json:20220924")
+	implementation ("org.json:json:20231013")
+	implementation ("org.apache.httpcomponents:httpclient:4.5.14")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
