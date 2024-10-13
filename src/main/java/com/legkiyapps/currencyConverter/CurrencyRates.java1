@@ -23,7 +23,7 @@ import org.json.JSONObject;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@AllArgsConstructor // я спецом сломал файл, чтобы он остался, но не мешал. Тут есть что обсудить
 public class CurrencyRates {
 
     public static final String ACCESS_KEY = "d0f9ac679bbb43417768123ff2170531";
@@ -42,7 +42,7 @@ public class CurrencyRates {
         HttpGet get = new HttpGet(BASE_URL + ENDPOINT + "?access_key=" + ACCESS_KEY
                 + "&currencies=" + CURRENCIES + "&source=" + SOURCE);
 
-        try {
+        try { //try/catch имеет closable конструкцию
             CloseableHttpResponse response =  httpClient.execute(get);
             HttpEntity entity = response.getEntity();
 

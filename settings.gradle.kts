@@ -1,1 +1,1 @@
-rootProject.name = "currencyConverter"
+rootProject.name = "Currency-Converter"

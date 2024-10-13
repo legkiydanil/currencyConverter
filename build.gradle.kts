@@ -1,36 +1,37 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
-	java
-	id("org.springframework.boot") version "3.3.4"
-	id("io.spring.dependency-management") version "1.1.6"
+    id("org.springframework.boot") version "3.3.4"
+    id("application")
+    id("idea")
 }
 
 group = "com.legkiyapps"
 version = "0.0.1-SNAPSHOT"
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation ("org.json:json:20231013")
-	implementation ("org.apache.httpcomponents:httpclient:4.5.14")
-	implementation ("org.freemarker:freemarker:2.3.32")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-	compileOnly ("org.projectlombok:lombok:1.18.34")
-	annotationProcessor ("org.projectlombok:lombok:1.18.34")
-	testCompileOnly ("org.projectlombok:lombok:1.18.34")
-	testAnnotationProcessor ("org.projectlombok:lombok:1.18.34")
+    implementation(platform(SpringBootPlugin.BOM_COORDINATES)) //Позволяет определять единую версию на все компоненты Spring Boot
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.3") // Это не Spring Boot, а Cloud поэтому версии могут отличаться
+
+    compileOnly("org.projectlombok:lombok:1.18.34")
+    annotationProcessor("org.projectlombok:lombok:1.18.34")
+
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.withType<Test> {
-	useJUnitPlatform()
+tasks.test {
+    useJUnitPlatform()
 }
