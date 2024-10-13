@@ -6,8 +6,10 @@ import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
@@ -19,8 +21,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@Getter
+@Setter
+@AllArgsConstructor
 public class CurrencyRates {
-
 
     public static final String ACCESS_KEY = "d0f9ac679bbb43417768123ff2170531";
     public static final String BASE_URL = "http://api.currencylayer.com/";
@@ -47,6 +51,7 @@ public class CurrencyRates {
             Date timeStampDate = new Date((long)(exchangeRates.getLong("timestamp")*1000));
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss a");
             String formattedDate = dateFormat.format(timeStampDate);
+
             String RUB = ("1 " + exchangeRates.getString("source") + " in RUB: "
                                + exchangeRates.getJSONObject("quotes").getDouble("USDRUB")
                                + " (Date: " + formattedDate + ")");
@@ -60,30 +65,13 @@ public class CurrencyRates {
                           + exchangeRates.getJSONObject("quotes").getDouble("USDGBP")
                           + " (Date: " + formattedDate + ")");
 
-            double USDRUB = exchangeRates.getJSONObject("quotes").getDouble("USDRUB");
-            double USDKZT = exchangeRates.getJSONObject("quotes").getDouble("USDKZT");
-            double USDCNY = exchangeRates.getJSONObject("quotes").getDouble("USDCNY");
-            double USDGBP = exchangeRates.getJSONObject("quotes").getDouble("USDGBP");
-
-            Scanner in = new Scanner(System.in);
-            System.out.println("Input amount in USD:");
-            double amount = in.nextDouble();
-            double convertedAmountRub =  amount * USDRUB;
-            double convertedAmountKzt =  amount * USDKZT;
-            double convertedAmountCny =  amount * USDCNY;
-            double convertedAmountGbp =  amount * USDGBP;
-
-            System.out.println(amount + "USD in RUB: " + convertedAmountRub);
-            System.out.println(amount + "USD in KZT: " + convertedAmountKzt);
-            System.out.println(amount + "USD in CNY: " + convertedAmountCny);
-            System.out.println(amount + "USD in GBP: " + convertedAmountGbp);
             System.out.println(RUB);
             System.out.println(KZT);
             System.out.println(CNY);
             System.out.println(GBP);
 
             response.close();
-            in.close();
+          //  in.close();
         } catch (ClientProtocolException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -97,12 +85,12 @@ public class CurrencyRates {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
     }
 
     public static void main(String[] args) throws IOException{
         sendLiveRequest();
         httpClient.close();
-        new BufferedReader(new InputStreamReader(System.in)).readLine();
     }
 }
 
