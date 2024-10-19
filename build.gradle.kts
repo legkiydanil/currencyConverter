@@ -23,6 +23,7 @@ dependencies {
     implementation(platform(SpringBootPlugin.BOM_COORDINATES)) //Позволяет определять единую версию на все компоненты Spring Boot
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation ("org.jetbrains:annotations:24.0.0")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.3") // Это не Spring Boot, а Cloud поэтому версии могут отличаться
 
     compileOnly("org.projectlombok:lombok:1.18.34")

@@ -2,7 +2,9 @@ package com.legkiyapps.currencyConverter.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.legkiyapps.currencyConverter.service.currency.CurrencyConvertService;
 import com.legkiyapps.currencyConverter.service.currency.CurrencyRateService;
+import com.legkiyapps.currencyConverter.service.currency.model.ConvertedExchangeRate;
 import com.legkiyapps.currencyConverter.service.currency.model.ExchangeRate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ public class CurrencyController {
     @Value("${spring.application.name}")
     private String name;
     private final CurrencyRateService currencyRateService;
+    private final CurrencyConvertService currencyConvertService;
 
     @GetMapping("/name")
     public String getNameApplication() {
@@ -33,5 +36,11 @@ public class CurrencyController {
     @GetMapping("/rates")
     public ExchangeRate getRates(@RequestParam List<String> currencies, @RequestParam String source) {
         return currencyRateService.getExchangeRate(currencies, source);
+    }
+
+    @GetMapping("/convert")
+    public ConvertedExchangeRate getConvertedRates(@RequestParam List<String> currencies, @RequestParam String source, @RequestParam double amount) {
+        ExchangeRate exchangeRate = currencyRateService.getExchangeRate(currencies, source);
+        return currencyConvertService.convertExchangeRate(exchangeRate, currencies, amount);
     }
 }
