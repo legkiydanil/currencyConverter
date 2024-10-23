@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -27,25 +25,6 @@ public class CurrencyConvertService {
             .maximumSize(1000)  // Максимальный размер кэша
             .build();
 
-   /* public ConvertedExchangeRate convertExchangeRate(@NonNull ExchangeRate exchangeRate, @NonNull List<String> currencies, double amount) {
-
-        Map<String, Double> convertedQuotes = new HashMap<>(exchangeRate.quotes());
-
-        String currencyToConvert = exchangeRate.source() + currencies.getFirst();
-
-        Double currentRate = convertedQuotes.get(currencyToConvert);
-        if (currentRate == null) {
-            throw new IllegalArgumentException("Курс для пары " + currencyToConvert + " не найден.");
-        }
-
-
-        double newValue = currentRate * amount;
-
-        convertedQuotes.put(currencyToConvert, newValue);
-
-        return new ConvertedExchangeRate(exchangeRate.timestamp(), exchangeRate.source(), amount, convertedQuotes);
-    }
-*/
 
     public ConvertedExchangeRate convertExchangeRate(@NonNull ExchangeRate exchangeRate, @NonNull List<String> currencies, double amount) {
 
