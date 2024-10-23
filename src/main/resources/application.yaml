@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Currency-Converter
+
+rest:
+  currency-layer:
+    api-key: b27986028f36acb16129c45c57b2a52c
+    url: https://api.currencylayer.com
+    connect-timeout: 60000
+    read-timeout: 60000
