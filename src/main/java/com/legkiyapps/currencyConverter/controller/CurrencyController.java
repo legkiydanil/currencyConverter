@@ -38,7 +38,7 @@ public class CurrencyController {
         return currencyRateService.getExchangeRate(currencies, source);
     }
 
-    @GetMapping("/rates/converted")
+    @GetMapping("/rates/converter")
     public ConvertedExchangeRate getConvertedRates(@RequestParam List<String> currencies, @RequestParam String source, @RequestParam double amount) {
         ExchangeRate exchangeRate = currencyRateService.getExchangeRate(currencies, source);
         return currencyConvertService.convertExchangeRate(exchangeRate, currencies, amount);
